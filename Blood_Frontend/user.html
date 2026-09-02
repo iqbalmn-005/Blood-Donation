@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Life Line - Donor Dashboard</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f7f8fa;
+            color: #20242d;
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .header {
+            height: 85px;
+            background: white;
+            border-bottom: 1px solid #eeeeee;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 40px;
+
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+
+            z-index: 100;
+        }
+
+
+        /* Logo */
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            color: #c91f32;
+
+            font-size: 28px;
+            font-weight: 600;
+        }
+
+
+        .logo-icon {
+            width: 42px;
+            height: 50px;
+
+            border: 4px solid #c91f32;
+
+            border-radius: 50% 50% 50% 10%;
+
+            transform: rotate(45deg);
+
+            position: relative;
+        }
+
+
+        .logo-icon::after {
+            content: "+";
+
+            position: absolute;
+
+            transform: rotate(-45deg);
+
+            color: #c91f32;
+
+            font-size: 22px;
+            font-weight: 600;
+
+            left: 9px;
+            top: 10px;
+        }
+
+
+        /* Header right */
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+
+        .notification {
+            font-size: 22px;
+            color: #c91f32;
+            cursor: pointer;
+        }
+
+
+        .logout-btn {
+            border: 1px solid #ed2941;
+
+            background: white;
+
+            color: #ed2941;
+
+            padding: 11px 20px;
+
+            border-radius: 8px;
+
+            font-family: inherit;
+
+            font-size: 15px;
+
+            cursor: pointer;
+        }
+
+
+        .logout-btn i {
+            margin-right: 8px;
+        }
+
+
+        /* =========================
+           SIDEBAR
+        ========================= */
+
+        .sidebar {
+            position: fixed;
+
+            top: 85px;
+            left: 0;
+            bottom: 0;
+
+            width: 250px;
+
+            background: #fff7f8;
+
+            border-right: 1px solid #eeeeee;
+
+            padding: 45px 20px;
+        }
+
+
+        .menu {
+            list-style: none;
+        }
+
+
+        .menu li {
+            margin-bottom: 12px;
+        }
+
+
+        .menu a {
+            display: flex;
+            align-items: center;
+
+            gap: 20px;
+
+            padding: 16px 20px;
+
+            text-decoration: none;
+
+            color: #20242d;
+
+            border-radius: 10px;
+
+            font-size: 16px;
+        }
+
+
+        .menu a:hover,
+        .menu .active {
+            background: #ffe5e9;
+            color: #d52338;
+        }
+
+
+        .menu i {
+            width: 25px;
+            font-size: 20px;
+        }
+
+
+        /* Donation illustration */
+
+        .donation-message {
+            position: absolute;
+
+            bottom: 40px;
+
+            left: 25px;
+            right: 25px;
+
+            text-align: center;
+        }
+
+
+        .blood-drop {
+            font-size: 70px;
+            color: #ed2941;
+            margin-bottom: 15px;
+        }
+
+
+        .donation-message h3 {
+            font-size: 18px;
+            color: #20242d;
+        }
+
+
+        .donation-message p {
+            font-size: 17px;
+            color: #ed2941;
+            font-weight: 600;
+        }
+
+
+        /* =========================
+           MAIN CONTENT
+        ========================= */
+
+        .main {
+            margin-left: 250px;
+
+            padding: 125px 75px 50px;
+
+            min-height: 100vh;
+        }
+
+
+        .welcome h1 {
+            font-size: 34px;
+            margin-bottom: 5px;
+        }
+
+
+        .welcome p {
+            color: #687080;
+            font-size: 17px;
+        }
+
+
+        /* =========================
+           PROFILE CARD
+        ========================= */
+
+        .profile-card {
+            background: white;
+
+            margin-top: 30px;
+
+            padding: 30px;
+
+            border-radius: 16px;
+
+            border: 1px solid #eeeeee;
+
+            box-shadow:
+                0 5px 20px rgba(0, 0, 0, 0.04);
+        }
+
+
+        .card-title {
+            display: flex;
+            align-items: center;
+
+            gap: 15px;
+
+            margin-bottom: 30px;
+
+            color: #d52338;
+        }
+
+
+        .card-title i {
+            width: 45px;
+            height: 45px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #fff0f2;
+
+            border-radius: 50%;
+
+            font-size: 20px;
+        }
+
+
+        .card-title h2 {
+            font-size: 23px;
+        }
+
+
+        /* Information grid */
+
+        .info-grid {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 30px 80px;
+        }
+
+
+        .info-item {
+            display: flex;
+            align-items: center;
+
+            gap: 15px;
+        }
+
+
+        .info-icon {
+            width: 45px;
+            height: 45px;
+
+            background: #fff0f2;
+
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: #ed2941;
+
+            font-size: 18px;
+        }
+
+
+        .info-text label {
+            display: block;
+
+            color: #687080;
+
+            font-size: 14px;
+
+            margin-bottom: 3px;
+        }
+
+
+        .info-text span {
+            font-size: 16px;
+            color: #20242d;
+        }
+
+
+        /* Status */
+
+        .status {
+            display: inline-block;
+
+            background: #e3f8ea;
+
+            color: #159447;
+
+            padding: 6px 13px;
+
+            border-radius: 20px;
+
+            font-size: 14px;
+        }
+
+
+        /* =========================
+           UPDATE DATE CARD
+        ========================= */
+
+        .update-card {
+            background: white;
+
+            margin-top: 25px;
+
+            padding: 30px;
+
+            border-radius: 16px;
+
+            border: 1px solid #eeeeee;
+
+            box-shadow:
+                0 5px 20px rgba(0, 0, 0, 0.04);
+        }
+
+
+        .update-title {
+            display: flex;
+            align-items: center;
+
+            gap: 15px;
+
+            color: #d52338;
+
+            margin-bottom: 10px;
+        }
+
+
+        .update-title i {
+            width: 45px;
+            height: 45px;
+
+            background: #fff0f2;
+
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        .update-title h2 {
+            font-size: 22px;
+        }
+
+
+        .update-description {
+            color: #687080;
+
+            margin-bottom: 25px;
+
+            font-size: 15px;
+        }
+
+
+        .date-form {
+            max-width: 520px;
+        }
+
+
+        .date-form label {
+            display: block;
+
+            margin-bottom: 8px;
+
+            font-size: 15px;
+        }
+
+
+        .date-input {
+            width: 100%;
+
+            height: 52px;
+
+            border: 1px solid #dddddd;
+
+            border-radius: 8px;
+
+            padding: 0 15px;
+
+            font-family: inherit;
+
+            font-size: 15px;
+
+            outline: none;
+        }
+
+
+        .date-input:focus {
+            border-color: #ed2941;
+        }
+
+
+        .update-btn {
+            width: 100%;
+
+            height: 52px;
+
+            margin-top: 15px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background: #ed2941;
+
+            color: white;
+
+            font-family: inherit;
+
+            font-size: 16px;
+
+            cursor: pointer;
+        }
+
+
+        .update-btn:hover {
+            background: #d92339;
+        }
+
+
+        /* =========================
+           MOBILE MENU
+        ========================= */
+
+        .menu-button {
+            display: none;
+
+            border: none;
+
+            background: none;
+
+            font-size: 23px;
+
+            color: #c91f32;
+
+            cursor: pointer;
+        }
+
+
+
+        /* =================================================
+           TABLET
+        ================================================= */
+
+        @media (max-width: 900px) {
+
+            .sidebar {
+                width: 210px;
+            }
+
+            .main {
+                margin-left: 210px;
+
+                padding-left: 35px;
+                padding-right: 35px;
+            }
+
+            .info-grid {
+                gap: 25px;
+            }
+        }
+
+
+
+        /* =================================================
+           MOBILE
+        ================================================= */
+
+        @media (max-width: 700px) {
+
+            body {
+                background: #f7f8fa;
+            }
+
+
+            /* Header */
+
+            .header {
+                height: 70px;
+
+                padding: 0 20px;
+            }
+
+
+            .logo {
+                font-size: 22px;
+            }
+
+
+            .logo-icon {
+                width: 34px;
+                height: 41px;
+
+                border-width: 3px;
+            }
+
+
+            .logo-icon::after {
+                font-size: 17px;
+
+                left: 7px;
+                top: 8px;
+            }
+
+
+            .notification {
+                display: none;
+            }
+
+
+            .logout-btn {
+                padding: 8px 12px;
+
+                font-size: 13px;
+            }
+
+
+            .menu-button {
+                display: block;
+            }
+
+
+            /* Sidebar */
+
+            .sidebar {
+
+                top: 70px;
+
+                width: 100%;
+
+                height: auto;
+
+                bottom: auto;
+
+                padding: 10px;
+
+                display: none;
+
+                z-index: 50;
+            }
+
+
+            .sidebar.show {
+                display: block;
+            }
+
+
+            .menu a {
+                padding: 12px 15px;
+            }
+
+
+            .donation-message {
+                display: none;
+            }
+
+
+            /* Main */
+
+            .main {
+
+                margin-left: 0;
+
+                padding: 95px 18px 30px;
+            }
+
+
+            .welcome h1 {
+                font-size: 25px;
+            }
+
+
+            .welcome p {
+                font-size: 14px;
+            }
+
+
+            /* Profile */
+
+            .profile-card,
+            .update-card {
+
+                padding: 20px;
+
+                margin-top: 20px;
+
+                border-radius: 12px;
+            }
+
+
+            .card-title h2,
+            .update-title h2 {
+                font-size: 19px;
+            }
+
+
+            .info-grid {
+
+                grid-template-columns: 1fr;
+
+                gap: 20px;
+            }
+
+
+            .info-icon {
+
+                width: 40px;
+                height: 40px;
+            }
+
+
+            .info-text span {
+
+                font-size: 15px;
+            }
+
+
+            .update-description {
+
+                font-size: 14px;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================
+     HEADER
+===================================== -->
+
+<header class="header">
+
+    <div class="logo flex items-center gap-2 sm:gap-2.5" style="display: flex; align-items: center; gap: 8px;">
+        <span class="text-[#E02424] text-xl sm:text-2xl flex items-center" style="color: #c91f32; font-size: 22px;">
+          <i class="fa-solid fa-droplet"></i>
+        </span>
+        <span class="text-base sm:text-lg font-bold text-slate-900 tracking-tight" style="color: #c91f32; font-weight: 700; font-size: 24px;">Life Line</span>
+        <span class="hidden sm:inline text-base sm:text-lg font-bold text-slate-900 tracking-tight" style="color: #c91f32; font-weight: 700; font-size: 24px;">: Blood Donor Directory</span>
+    </div>
+
+
+    <div class="header-right">
+
+
+        <a href="{% url 'logout' %}" class="logout-btn" style="text-decoration: none; display: inline-flex; items-center: center;">
+
+            <i class="fa-solid fa-right-from-bracket"></i>
+
+            Logout
+
+        </a>
+
+
+        <button class="menu-button" id="menuButton">
+
+            <i class="fa-solid fa-bars"></i>
+
+        </button>
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================
+     SIDEBAR
+===================================== -->
+
+<aside class="sidebar" id="sidebar">
+
+    <ul class="menu">
+
+        <li>
+            <a href="#" class="active">
+
+                <i class="fa-solid fa-house"></i>
+
+                Dashboard
+
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'logout' %}">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                Logout
+
+            </a>
+        </li>
+
+    </ul>
+
+
+    <!-- Donation message -->
+
+    <div class="donation-message">
+
+        <div class="blood-drop">
+
+            <i class="fa-solid fa-droplet"></i>
+
+        </div>
+
+        <h3>Donate Blood</h3>
+
+        <p>Save Lives</p>
+
+    </div>
+
+</aside>
+
+
+
+<!-- =====================================
+     MAIN
+===================================== -->
+
+<main class="main">
+
+
+    <!-- Welcome -->
+
+    <section class="welcome">
+
+        <h1>
+            Welcome, {{ donor.first_name }}! 👋
+        </h1>
+
+        <p>
+            Thank you for being a hero.
+        </p>
+
+    </section>
+
+
+
+    <!-- =================================
+         DONOR PROFILE
+    ================================== -->
+
+    <section class="profile-card">
+
+
+        <div class="card-title">
+
+            <i class="fa-regular fa-user"></i>
+
+            <h2>
+                My Donor Profile
+            </h2>
+
+        </div>
+
+
+
+        <div class="info-grid">
+
+
+            <!-- Name -->
+
+            <div class="info-item">
+
+                <div class="info-icon">
+
+                    <i class="fa-regular fa-user"></i>
+
+                </div>
+
+                <div class="info-text">
+
+                    <label>Name</label>
+
+                    <span>
+                        {{ donor.first_name }}
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- City / District -->
+
+            <div class="info-item">
+
+                <div class="info-icon">
+
+                    <i class="fa-solid fa-location-dot"></i>
+
+                </div>
+
+                <div class="info-text">
+
+                    <label>District / Location</label>
+
+                    <span>
+                        {{ donor.district }}
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Blood Group -->
+
+            <div class="info-item">
+
+                <div class="info-icon">
+
+                    <i class="fa-solid fa-droplet"></i>
+
+                </div>
+
+                <div class="info-text">
+
+                    <label>Blood Group</label>
+
+                    <span>
+                        {{ donor.blood_group }}
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Last Donation -->
+
+            <div class="info-item">
+
+                <div class="info-icon">
+
+                    <i class="fa-regular fa-calendar"></i>
+
+                </div>
+
+                <div class="info-text">
+
+                    <label>
+                        Last Donated Date
+                    </label>
+
+                    <span id="displayDate">
+                        {% if donor.last_donation_date %}{{ donor.last_donation_date|date:"d F Y" }}{% else %}Not Donated Yet{% endif %}
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Mobile -->
+
+            <div class="info-item">
+
+                <div class="info-icon">
+
+                    <i class="fa-solid fa-phone"></i>
+
+                </div>
+
+                <div class="info-text">
+
+                    <label>
+                        Mobile Number
+                    </label>
+
+                    <span>
+                        {{ donor.phone_number }}
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Status -->
+
+            <div class="info-item">
+
+                <div class="info-icon">
+
+                    <i class="fa-regular fa-circle-check"></i>
+
+                </div>
+
+                <div class="info-text">
+
+                    <label>Status</label>
+
+                    {% if donor.is_available %}
+                    <span class="status">
+                        Available for Donation
+                    </span>
+                    {% else %}
+                    <span class="status" style="background:#fff1f3; color:#ed2941;">
+                        Cannot Donate ({{ donor.days_remaining }} days left)
+                    </span>
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================
+         UPDATE DONATION DATE
+    ================================== -->
+
+    <section class="update-card">
+
+
+        <div class="update-title">
+
+            <i class="fa-regular fa-calendar"></i>
+
+            <h2>
+                Update Last Donated Date
+            </h2>
+
+        </div>
+
+
+        <p class="update-description">
+            Please update the date when you last donated blood. (You can donate once every 90 days).
+        </p>
+
+
+
+        <form class="date-form" id="dateForm" method="POST" action="{% url 'user' %}">
+            {% csrf_token %}
+
+            <label for="donationDate">
+
+                Last Donated Date
+
+            </label>
+
+
+            <input
+                type="date"
+                id="donationDate"
+                name="last_donation_date"
+                class="date-input"
+                value="{% if donor.last_donation_date %}{{ donor.last_donation_date|date:'Y-m-d' }}{% endif %}"
+                required
+            >
+
+
+            <button
+                type="submit"
+                class="update-btn">
+
+                Update Date
+
+            </button>
+
+
+        </form>
+
+    </section>
+
+
+</main>
+
+
+
+<!-- =====================================
+     JAVASCRIPT
+===================================== -->
+
+<script>
+
+    /* ===============================
+       MOBILE MENU
+    =============================== */
+
+    const menuButton =
+        document.getElementById("menuButton");
+
+    const sidebar =
+        document.getElementById("sidebar");
+
+
+    menuButton.addEventListener("click", function () {
+
+        sidebar.classList.toggle("show");
+
+    });
+
+
+
+</script>
+
+
+</body>
+</html>
